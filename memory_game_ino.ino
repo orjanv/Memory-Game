@@ -50,7 +50,7 @@ void loop() {
     
     int randArray[5];
     // Make numbers more random
-    randomSeed(42);
+    randomSeed(micros());
     // Fill the array random numbers from 1-5
     for (int i = 0; i < pinCount; i++) {
       randArray[i] = random(1, 5);
@@ -58,7 +58,7 @@ void loop() {
     
     // Illuminate LEDs according to this array of random numbers
     for (int ledPin = 0; ledPin < pinCount; ledPin++) {
-      digitalWrite(ledPins[randArray[ledPin]]);
+      digitalWrite(ledPins[ledPin],randArray[ledPin]);
       delay(1000);
     }
     
