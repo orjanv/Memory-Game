@@ -53,7 +53,7 @@ void loop() {
     randomSeed(micros());
     // Fill the array random numbers from 1-5
     for (int i = 0; i < pinCount; i++) {
-      randArray[i] = random(1, 5);
+      randArray[i] = random(0.1, 1.5);
     }
     
     // Illuminate LEDs according to this array of random numbers
