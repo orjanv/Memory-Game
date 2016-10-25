@@ -27,7 +27,8 @@ int pinCount = 6;
 void setup() {
   // initialize the startbutton pin as an input:
   pinMode(startButton, INPUT);
-  
+    // initialize the readyled button
+  pinMode(readyLed, OUTPUT);
   // the array elements are numbered from 0 to (pinCount - 1).
   // use a for loop to initialize each pin as an output:
   for (int thisPin = 0; thisPin < pinCount; thisPin++) {
