@@ -1,21 +1,27 @@
 /*
 
-  Memory game implemantation in arduino
-  
-  Five buttons, five LEDs, a start button
-  Upon start/reset, the LEDs flash in 
-  random order. Your job is to press the 
-  buttons in same order after a signal has 
-  been given.
-  
-  Written by Ørjan Vøllestad, 2016
-  http://gitlab.com/orjanv/memorygame
+ Memory game implemantation in arduino
+ 
+ Five buttons, five LEDs, a start button
+ Upon start/reset, the LEDs flash in 
+ random order. Your job is to press the 
+ buttons in same order after a signal has 
+ been given.
+ 
+ Written by Ørjan Vøllestad, 2016
+ http://gitlab.com/orjanv/memorygame
+ 
+ Thanks for Christoffer Stausland for 
+ helping me out with the code.
+ 
+ */
 
-*/
-
-int ledPins[] = {8, 9, 10, 12, 11};
-int buttonPins[] = {3, 4, 5, 7, 6};
-int answerArray[] = {};
+int ledPins[] = {
+  8, 9, 10, 12, 11};
+int buttonPins[] = {
+  3, 4, 5, 7, 6};
+int answerArray[] = {
+};
 int startButton = 2;
 int readyLed = 13;
 int pinCount = 5;
@@ -25,7 +31,7 @@ void setup() {
   Serial.begin(9600);
   // initialize the startbutton pin as an input:
   pinMode(startButton, INPUT_PULLUP);
-    // initialize the readyled button
+  // initialize the readyled button
   pinMode(readyLed, OUTPUT);
   // the array elements are numbered from 0 to (pinCount - 1).
   // use a for loop to initialize each pin as an output:
@@ -36,7 +42,7 @@ void setup() {
   for (int thisPin = 0; thisPin < pinCount; thisPin++) {
     pinMode(buttonPins[thisPin], INPUT_PULLUP);
   }
-  
+
   // Generate a welcome message on the LCD
 
   // TESTING LEDS by flashing them
@@ -58,7 +64,7 @@ void setup() {
 void loop() {
   // Wait for start/reset button to be pressed
   //Serial.println("Venter paa knapp");
-  
+
   if (digitalRead(startButton) == LOW) {
     Serial.println("Game is started!");
     int randArray[5];
@@ -69,7 +75,7 @@ void loop() {
       randArray[i] = random(0, 4);
       Serial.println(randArray[i]);
     }
-    
+
     // Illuminate LEDs according to this array of random numbers
     for (int ledPin = 0; ledPin < pinCount; ledPin++) {
       digitalWrite(ledPins[randArray[ledPin]],HIGH);
@@ -77,7 +83,7 @@ void loop() {
       digitalWrite(ledPins[randArray[ledPin]],LOW);
       delay(1000);
     }
-    
+
     // Give ready signal
     digitalWrite(readyLed, HIGH);
 
@@ -96,7 +102,7 @@ void loop() {
         } // end if
       } // end for
     } // end scan buttons loop 
-    
+
     // Compare randArray with values from answerArray
     result = true; // set variable equal to one.
     for (int i = 0; i < pinCount; i++) { 
@@ -116,7 +122,8 @@ void loop() {
     digitalWrite(readyLed, LOW);
     Serial.println("End of game!");
     delay(2000);
-    
+
   } // end while startbutton pressed loop
   delay(50);
 } // end main loop
+
